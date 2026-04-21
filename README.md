@@ -41,6 +41,14 @@ package.json
 
 ---
 
+
+## Architecture Diagram
+
+<img width="504" height="450" alt="loglite_architecture" src="https://github.com/user-attachments/assets/17d162cc-5d0b-4f0a-8b61-e5aceb845641" />
+
+
+---
+
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the repository
