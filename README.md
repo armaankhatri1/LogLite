@@ -125,7 +125,10 @@ Returns:
   "warn": 5,
   "error": 5
 }
-🔮 Future Improvements
+
+---
+
+## Future Improvements
 Add Winston logging comparison
 Add charts using Chart.js
 Detect repeated errors and anomalies
