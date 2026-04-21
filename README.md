@@ -126,14 +126,4 @@ Returns:
   "error": 5
 }
 
----
 
-## Future Improvements
-Add Winston logging comparison
-Add charts using Chart.js
-Detect repeated errors and anomalies
-Deploy to cloud (AWS/Azure)
-👥 Team
-Armaan Khatri
-James Barbi
-Nozanin Bahridinova
