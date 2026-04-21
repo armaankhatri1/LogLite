@@ -51,54 +51,64 @@ package.json
 
 ## ⚙️ Setup Instructions
 
+
 ### 1. Clone the repository
 
-
-git clone https://github.com/armaankhatri1/LogLite.git
-
+git clone https://github.com/armaankhatri1/LogLite.git  
 cd LogLite
-
 
 ---
 
 ### 2. Install dependencies
 
-
-npm install express winston
-
+npm install
 
 ---
 
-### 3. Generate logs
+### 3. Generate logs (choose a mode)
 
+#### Console Logging
 
-node sampleApp.js
+Run:
 
+node sampleApp.js console
 
-This will create a log file in:
+- Logs are printed in plain text format  
+- Example:
 
-logs/app.log
+INFO: User logged in  
+ERROR: Failed login attempt  
 
+- Unstructured and mainly used for debugging  
+- Logs are manually written to file  
+
+---
+
+#### Winston Logging
+
+Run:
+
+node sampleApp.js winston
+
+- Logs are written in structured JSON format  
+- Example:
+
+{"level":"info","message":"User logged in","timestamp":"..."}
+
+- Persistent and structured  
+- Better suited for monitoring and DevOps systems  
 
 ---
 
 ### 4. Start the server
 
-
 node server.js
-
 
 ---
 
 ### 5. Open the application
 
-Go to:
-
-
 http://localhost:3000
-
-
----
 
 ## 🔄 How It Works
 
