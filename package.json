@@ -1,0 +1,24 @@
+{
+  "name": "loglite",
+  "version": "1.0.0",
+  "description": "LogLite is a lightweight, JavaScript-based log analysis and visualization tool designed to provide basic operational and security visibility for small applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armaankhatri1/LogLite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/armaankhatri1/LogLite/issues"
+  },
+  "homepage": "https://github.com/armaankhatri1/LogLite#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "winston": "^3.19.0"
+  }
+}
