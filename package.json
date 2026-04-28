@@ -4,7 +4,9 @@
   "description": "LogLite is a lightweight, JavaScript-based log analysis and visualization tool designed to provide basic operational and security visibility for small applications.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,10 @@
   "dependencies": {
     "express": "^5.2.1",
     "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "globals": "^17.5.0"
   }
 }

@@ -22,14 +22,14 @@ function parseLogs() {
     try {
       const log = JSON.parse(line);
 
-      if (log.level === 'info') info++;
-      else if (log.level === 'warn') warn++;
-      else if (log.level === 'error') error++;
+      if (log.level === 'info') {info++;}
+      else if (log.level === 'warn') {warn++;}
+      else if (log.level === 'error') {error++;}
     } catch {
       // fallback for console-style logs
-      if (line.includes('INFO')) info++;
-      else if (line.includes('WARN')) warn++;
-      else if (line.includes('ERROR')) error++;
+      if (line.includes('INFO')) {info++;}
+      else if (line.includes('WARN')) {warn++;}
+      else if (line.includes('ERROR')) {error++;}
     }
   });
 
