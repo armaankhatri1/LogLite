@@ -13,6 +13,29 @@
   <div>ERROR: <span id="errorCount">0</span></div>
   <div>UNKNOWN: <span id="unknownCount">0</span></div>
 
+  <h2>Security Pattern Detection</h2>
+  <div>Security-Relevant Events: <span id="securityEventCount">0</span></div>
+  <div>Repeated Failure Alerts: <span id="securityAlertCount">0</span></div>
+  <div>Alert Threshold: <span id="securityThreshold">0</span> matching events</div>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Message</th>
+        <th>Count</th>
+        <th>First Seen</th>
+        <th>Last Seen</th>
+      </tr>
+    </thead>
+    <tbody id="securityAlertsBody">
+      <tr>
+        <td colspan="6">No repeated security failures found.</td>
+      </tr>
+    </tbody>
+  </table>
+
   <h2>Recurring Warnings and Errors</h2>
   <table border="1">
     <thead>

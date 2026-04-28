@@ -4,6 +4,25 @@ const path = require('path');
 const LOG_PATH = path.join(__dirname, 'logs', 'app.log');
 const SEVERITIES = ['info', 'warn', 'error', 'unknown'];
 const ISSUE_LEVELS = new Set(['warn', 'error']);
+const SECURITY_ALERT_THRESHOLD = 3;
+
+const SECURITY_FAILURE_PATTERNS = [
+  {
+    type: 'authentication_failure',
+    label: 'Repeated authentication failures',
+    regex: /\b(failed login|login failed|authentication failed|invalid password|invalid credentials)\b/i
+  },
+  {
+    type: 'authorization_failure',
+    label: 'Repeated authorization failures',
+    regex: /\b(unauthorized|forbidden|access denied|permission denied)\b/i
+  },
+  {
+    type: 'service_failure',
+    label: 'Repeated service failures',
+    regex: /\b(database connection failed|connection failed|request failed|timeout|failed to connect)\b/i
+  }
+];
 
 function createEmptyCounts() {
   return {
@@ -114,16 +133,84 @@ function groupRecurringIssues(entries) {
     .sort((a, b) => b.count - a.count || a.severity.localeCompare(b.severity));
 }
 
+function getMatchingSecurityPattern(message) {
+  if (!message || typeof message !== 'string') {
+    return null;
+  }
+
+  return SECURITY_FAILURE_PATTERNS.find(pattern => pattern.regex.test(message)) || null;
+}
+
+function detectSecurityPatterns(entries, threshold = SECURITY_ALERT_THRESHOLD) {
+  const groupedFailures = new Map();
+  let totalSecurityEvents = 0;
+
+  for (const entry of entries) {
+    const pattern = getMatchingSecurityPattern(entry.message);
+
+    if (!pattern) {
+      continue;
+    }
+
+    totalSecurityEvents += 1;
+
+    const message = entry.message || 'No message provided';
+    const key = `${pattern.type}:${message.toLowerCase()}`;
+
+    if (!groupedFailures.has(key)) {
+      groupedFailures.set(key, {
+        type: 'REPEATED_FAILURE',
+        category: pattern.type,
+        description: pattern.label,
+        severity: entry.severity.toUpperCase(),
+        message,
+        count: 0,
+        threshold,
+        firstSeen: entry.timestamp,
+        lastSeen: entry.timestamp
+      });
+    }
+
+    const alert = groupedFailures.get(key);
+    alert.count += 1;
+
+    if (!alert.firstSeen && entry.timestamp) {
+      alert.firstSeen = entry.timestamp;
+    }
+
+    if (entry.timestamp) {
+      alert.lastSeen = entry.timestamp;
+    }
+  }
+
+  const repeatedFailures = Array.from(groupedFailures.values())
+    .filter(alert => alert.count >= threshold)
+    .sort((a, b) => b.count - a.count || a.category.localeCompare(b.category));
+
+  return {
+    totalSecurityEvents,
+    threshold,
+    alertCount: repeatedFailures.length,
+    repeatedFailures
+  };
+}
+
 function parseLogs(logPath = LOG_PATH) {
   if (!fs.existsSync(logPath)) {
     const emptyCounts = createEmptyCounts();
-  
+
     return {
       totalLogs: 0,
       ...emptyCounts,
       severityCounts: emptyCounts,
       entries: [],
-      recurringIssues: []
+      recurringIssues: [],
+      securityAlerts: [],
+      securitySummary: {
+        totalSecurityEvents: 0,
+        threshold: SECURITY_ALERT_THRESHOLD,
+        alertCount: 0
+      }
     };
   }
 
@@ -131,25 +218,29 @@ function parseLogs(logPath = LOG_PATH) {
     .split('\n')
     .map(line => line.trim())
     .filter(Boolean);
-  
+
   const severityCounts = createEmptyCounts();
   const entries = lines.map(parseLine);
-  
+
   for (const entry of entries) {
     severityCounts[entry.severity] += 1;
   }
 
   const recurringIssues = groupRecurringIssues(entries);
+  const securitySummary = detectSecurityPatterns(entries);
 
   return {
     totalLogs: entries.length,
     ...severityCounts,
     severityCounts,
     entries,
-    recurringIssues
+    recurringIssues,
+    securityAlerts: securitySummary.repeatedFailures,
+    securitySummary
   };
 }
 
 module.exports = parseLogs;
 module.exports.parseLine = parseLine;
 module.exports.groupRecurringIssues = groupRecurringIssues;
+module.exports.detectSecurityPatterns = detectSecurityPatterns;
