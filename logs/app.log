@@ -1,20 +1,22 @@
-INFO: Page loaded
-ERROR: Database connection failed
-INFO: User logged in
-ERROR: Failed login attempt
-WARN: Slow response detected
-INFO: User logged in
-INFO: Page loaded
-INFO: Page loaded
-INFO: Page loaded
-ERROR: Failed login attempt
-INFO: User logged in
-ERROR: Database connection failed
-ERROR: Failed login attempt
-ERROR: Database connection failed
-WARN: Slow response detected
-ERROR: Failed login attempt
-WARN: Slow response detected
-INFO: User logged in
-WARN: Slow response detected
-ERROR: Failed login attempt
+{"level":"info","message":"User logged in","timestamp":"2026-04-29T02:54:51.552Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"warn","message":"Slow response detected","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"info","message":"User logged in","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"error","message":"Failed login attempt","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"error","message":"Database connection failed","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"warn","message":"Slow response detected","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.555Z"}
+{"level":"error","message":"Database connection failed","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"info","message":"User logged in","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"error","message":"Database connection failed","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"warn","message":"Slow response detected","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"info","message":"Page loaded","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"warn","message":"Slow response detected","timestamp":"2026-04-29T02:54:51.556Z"}
+{"level":"error","message":"Failed login attempt","timestamp":"2026-04-29T02:54:51.556Z"}
+
+{"level":"error","message":"Failed login attempt","timestamp":"2026-04-28T02:54:51.556Z"}
