@@ -95,9 +95,11 @@ node sampleApp.js winston
 
 ---
 
-### 4. Start the server
+### 4. Start the servers
 
-node server.js
+node run dev
+
+This will begin the frontend and backend
 
 ---
 
