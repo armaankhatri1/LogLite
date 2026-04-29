@@ -1,0 +1,32 @@
+# ─── LogLite docker-compose ──────────────────────────────────
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: loglite-api
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    volumes:
+      - log-data:/app/logs
+    command: ["node", "server.js"]
+    restart: unless-stopped
+
+  ui:
+    build: .
+    container_name: loglite-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - api
+    command: ["npx", "next", "start"]
+    restart: unless-stopped
+
+volumes:
+  log-data:
+    driver: local
