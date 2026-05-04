@@ -97,7 +97,7 @@ node sampleApp.js winston
 
 ### 4. Start the servers
 
-node run dev
+npm run dev
 
 This will begin the frontend and backend
 
